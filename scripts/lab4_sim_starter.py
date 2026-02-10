@@ -136,7 +136,7 @@ class RobotController:
             t = rospy.get_time()
             u = self.p_controller.control(err, t)
 
-            ctrl_msg.angular.z = u ## is this right? 
+            ctrl_msg.angular.z = -u ## is this right? 
 
             ######### Your code ends here #########
 
