@@ -18,6 +18,10 @@ class PController:
         assert u_min < u_max, "u_min should be less than u_max"
         # Initialize variables here
         ######### Your code starts here #########
+        self.t_prev = 0
+        self.kP = kP
+        self.u_min = u_min
+        self.u_max = u_max
 
         ######### Your code ends here #########
 
@@ -28,7 +32,13 @@ class PController:
 
         # Compute control action here
         ######### Your code starts here #########
+        #err is current error (desired distance minus actual distance)
+        u = self.kP*err
+        u = max(self.u_min, min(u, self.u_max))
 
+        self.t_prev = t
+
+        return u
         ######### Your code ends here #########
 
 
@@ -43,6 +53,12 @@ class PDController:
         assert u_min < u_max, "u_min should be less than u_max"
         # Initialize variables here
         ######### Your code starts here #########
+        self.t_prev = 0
+        self.err_prev = 0
+        self.kP = kP
+        self.kD = kD
+        self.u_min = u_min
+        self.u_max = u_max
 
         ######### Your code ends here #########
 
@@ -53,7 +69,15 @@ class PDController:
 
         # Compute control action here
         ######### Your code starts here #########
+        d_err = err - self.err_prev
 
+        u = self.kP*err + self.kD*(d_err/dt)
+        u = max(self.u_min, min(u, self.u_max))
+
+        self.t_prev = t
+        self.err_prev = err
+
+        return u
         ######### Your code ends here #########
 
 
@@ -68,6 +92,15 @@ class RobotController:
 
         # Define PD controller for wall-following here
         ######### Your code starts here #########
+        
+        # SET THESE VALUES IN LAB !!!!
+        kP = 2.0
+        u_min = -1.0
+        u_max = 1.0
+
+        #kD = 0.5 # -- for when we make pDcontroller
+
+        self.p_controller = PController(kP, u_min, u_max)
 
         ######### Your code ends here #########
 
@@ -95,6 +128,14 @@ class RobotController:
 
             # using PD controller, compute and send motor commands
             ######### Your code starts here #########
+
+            ctrl_msg.linear.x = 0.1 ## random initial speed set  CHANGE IN LAB IF NEEDED
+
+            err = self.desired_distance - self.ir_distance
+            t = time()
+            u = self.p_controller.control(err, t)
+
+            ctrl_msg.angular.z = u ## is this right? 
 
             ######### Your code ends here #########
 
