@@ -92,11 +92,14 @@ class RobotController:
 
         # Define PD controller for wall-following here
         ######### Your code starts here #########
+
+        kP = 0.08
+        u_min = -0.25
+        u_max = 0.25
         
-        # SET THESE VALUES IN LAB !!!!
-        kP = .30
-        u_min = -.80
-        u_max = .80
+        # kP = .30
+        # u_min = -.80
+        # u_max = .80
 
         #kD = 0.5 # -- for when we make pDcontroller
 
@@ -130,13 +133,13 @@ class RobotController:
             # using PD controller, compute and send motor commands
             ######### Your code starts here #########
 
-            ctrl_msg.linear.x = 0.15 ## random initial speed set  CHANGE IN LAB IF NEEDED
+            ctrl_msg.linear.x = 0.05 ## random initial speed set  CHANGE IN LAB IF NEEDED
             
-            err = self.ir_distance - self.desired_distance - 0.7
+            err = self.ir_distance - self.desired_distance
             t = rospy.get_time()
             u = self.p_controller.control(err, t)
 
-            ctrl_msg.angular.z = -u ## is this right? 
+            ctrl_msg.angular.z = u ## is this right? 
 
             ######### Your code ends here #########
 
