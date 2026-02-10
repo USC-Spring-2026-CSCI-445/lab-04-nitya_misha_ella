@@ -130,7 +130,7 @@ class RobotController:
             # using PD controller, compute and send motor commands
             ######### Your code starts here #########
 
-            ctrl_msg.linear.x = 0.1 ## random initial speed set  CHANGE IN LAB IF NEEDED
+            ctrl_msg.linear.x = 0.5 ## random initial speed set  CHANGE IN LAB IF NEEDED
             
             err = self.ir_distance - self.desired_distance
             t = rospy.get_time()
