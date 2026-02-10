@@ -94,7 +94,7 @@ class RobotController:
         ######### Your code starts here #########
         
         # SET THESE VALUES IN LAB !!!!
-        kP = 2.0
+        kP = 1.0
         u_min = -1.0
         u_max = 1.0
 
@@ -130,13 +130,13 @@ class RobotController:
             # using PD controller, compute and send motor commands
             ######### Your code starts here #########
 
-            ctrl_msg.linear.x = 0.15 ## random initial speed set  CHANGE IN LAB IF NEEDED
+            ctrl_msg.linear.x = 0.1 ## random initial speed set  CHANGE IN LAB IF NEEDED
 
             err = self.desired_distance - self.ir_distance
             t = rospy.get_time()
             u = self.p_controller.control(err, t)
 
-            ctrl_msg.angular.z = u ## is this right? 
+            ctrl_msg.angular.z = -u ## is this right? 
 
             ######### Your code ends here #########
 
