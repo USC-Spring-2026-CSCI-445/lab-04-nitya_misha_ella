@@ -132,7 +132,7 @@ class RobotController:
 
             ctrl_msg.linear.x = 0.5 ## random initial speed set  CHANGE IN LAB IF NEEDED
             
-            err = self.ir_distance - self.desired_distance
+            err = self.ir_distance - self.desired_distance - 0.7
             t = rospy.get_time()
             u = self.p_controller.control(err, t)
 
