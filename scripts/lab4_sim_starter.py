@@ -114,10 +114,10 @@ class RobotController:
     #         self.ir_distance = sum(left) / len(left)
 
     def robot_laserscan_callback(self, lscan):
-        self.ir_distance = min(
-            r for r in lscan.ranges
-            if not math.isinf(r) and not math.isnan(r)
-        )
+        valid = [r for r in lscan.ranges if r != inf and r == r]
+        if valid:
+            self.ir_distance = min(valid)
+
 
 
     def control_loop(self):
