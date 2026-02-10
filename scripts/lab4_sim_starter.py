@@ -18,7 +18,7 @@ class PController:
         assert u_min < u_max, "u_min should be less than u_max"
         # Initialize variables here
         ######### Your code starts here #########
-        self.t_prev = 0
+        self.t_prev = rospy.get_time()
         self.kP = kP
         self.u_min = u_min
         self.u_max = u_max
@@ -53,7 +53,7 @@ class PDController:
         assert u_min < u_max, "u_min should be less than u_max"
         # Initialize variables here
         ######### Your code starts here #########
-        self.t_prev = 0
+        self.t_prev = rospy.get_time()
         self.err_prev = 0
         self.kP = kP
         self.kD = kD
@@ -132,7 +132,7 @@ class RobotController:
             ctrl_msg.linear.x = 0.5 ## random initial speed set  CHANGE IN LAB IF NEEDED
 
             err = self.desired_distance - self.ir_distance
-            t = time()
+            t = rospy.get_time()
             u = self.p_controller.control(err, t)
 
             ctrl_msg.angular.z = u ## is this right? 
