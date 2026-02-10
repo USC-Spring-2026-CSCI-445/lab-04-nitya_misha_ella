@@ -131,12 +131,12 @@ class RobotController:
             ######### Your code starts here #########
 
             ctrl_msg.linear.x = 0.1 ## random initial speed set  CHANGE IN LAB IF NEEDED
-
-            err = self.desired_distance - self.ir_distance
+            
+            err = self.ir_distance - self.desired_distance
             t = rospy.get_time()
             u = self.p_controller.control(err, t)
 
-            ctrl_msg.angular.z = -u ## is this right? 
+            ctrl_msg.angular.z = u ## is this right? 
 
             ######### Your code ends here #########
 
