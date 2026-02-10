@@ -93,7 +93,7 @@ class RobotController:
         # Define PD controller for wall-following here
         ######### Your code starts here #########
 
-        kP = 0.08
+        kP = 0.1
         u_min = -0.25
         u_max = 0.25
         
@@ -135,7 +135,7 @@ class RobotController:
 
             ctrl_msg.linear.x = 0.05 ## random initial speed set  CHANGE IN LAB IF NEEDED
             
-            err = self.ir_distance - self.desired_distance
+            err = self.desired_distance - self.ir_distance
             t = rospy.get_time()
             u = self.p_controller.control(err, t)
 
