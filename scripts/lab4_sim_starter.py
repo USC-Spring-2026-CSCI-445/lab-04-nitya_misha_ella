@@ -94,9 +94,9 @@ class RobotController:
         ######### Your code starts here #########
         
         # SET THESE VALUES IN LAB !!!!
-        kP = 1.0
-        u_min = -1.0
-        u_max = 1.0
+        kP = 2.0
+        u_min = -2.70
+        u_max = 2.70
 
         #kD = 0.5 # -- for when we make pDcontroller
 
