@@ -93,9 +93,9 @@ class RobotController:
         # Define PD controller for wall-following here
         ######### Your code starts here #########
 
-        kP = 0.1
-        u_min = -0.25
-        u_max = 0.25
+        kP = 0.4
+        u_min = -0.4
+        u_max = 0.4
         
         # kP = .30
         # u_min = -.80
