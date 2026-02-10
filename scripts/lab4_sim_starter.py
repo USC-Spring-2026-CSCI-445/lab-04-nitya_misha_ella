@@ -107,17 +107,11 @@ class RobotController:
         self.desired_distance = desired_distance  # Desired distance from the wall
         self.ir_distance = None
 
-    # def robot_laserscan_callback(self, lscan: LaserScan):
-    #     left = lscan.ranges[80:100]
-    #     left = [x for x in left if x != inf]
-    #     if len(left) > 0:
-    #         self.ir_distance = sum(left) / len(left)
-
-    def robot_laserscan_callback(self, lscan):
-        valid = [r for r in lscan.ranges if r != inf and r == r]
-        if valid:
-            self.ir_distance = min(valid)
-
+    def robot_laserscan_callback(self, lscan: LaserScan):
+        left = lscan.ranges[80:100]
+        left = [x for x in left if x != inf]
+        if len(left) > 0:
+            self.ir_distance = sum(left) / len(left)
 
 
     def control_loop(self):
