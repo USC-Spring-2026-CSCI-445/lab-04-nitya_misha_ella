@@ -94,7 +94,7 @@ class RobotController:
         ######### Your code starts here #########
         
         # SET THESE VALUES IN LAB !!!!
-        kP = 1.0
+        kP = .50
         u_min = -1.0
         u_max = 1.0
 
