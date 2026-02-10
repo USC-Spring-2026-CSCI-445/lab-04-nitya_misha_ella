@@ -107,11 +107,18 @@ class RobotController:
         self.desired_distance = desired_distance  # Desired distance from the wall
         self.ir_distance = None
 
-    def robot_laserscan_callback(self, lscan: LaserScan):
-        left = lscan.ranges[80:100]
-        left = [x for x in left if x != inf]
-        if len(left) > 0:
-            self.ir_distance = sum(left) / len(left)
+    # def robot_laserscan_callback(self, lscan: LaserScan):
+    #     left = lscan.ranges[80:100]
+    #     left = [x for x in left if x != inf]
+    #     if len(left) > 0:
+    #         self.ir_distance = sum(left) / len(left)
+
+    def robot_laserscan_callback(self, lscan):
+        self.ir_distance = min(
+            r for r in lscan.ranges
+            if not math.isinf(r) and not math.isnan(r)
+        )
+
 
     def control_loop(self):
 
@@ -129,7 +136,7 @@ class RobotController:
             # using PD controller, compute and send motor commands
             ######### Your code starts here #########
 
-            ctrl_msg.linear.x = 0.5 ## random initial speed set  CHANGE IN LAB IF NEEDED
+            ctrl_msg.linear.x = 0.15 ## random initial speed set  CHANGE IN LAB IF NEEDED
 
             err = self.desired_distance - self.ir_distance
             t = rospy.get_time()
