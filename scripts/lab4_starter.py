@@ -83,8 +83,9 @@ class RobotController:
 
         # Define PD controller for wall following here
         ######### Your code starts here #########
-        kP = 1.2
-        kD = 0.05
+        # Reduced gains for real hardware (less noisy than sim)
+        kP = 0.8
+        kD = 0.03
         u_min = -1.5
         u_max = 1.5
 
@@ -120,15 +121,12 @@ class RobotController:
             ######### Your code starts here #########
 
             target = self.desired_distance
-
-            # For LEFT wall following:
-            # positive error means too far from wall
             err = target - self.ir_distance
-
             u = self.controller.control(err, time())
 
-            ctrl_msg.linear.x = 0.07
-            ctrl_msg.angular.z = -u   # flip sign for correct turning direction
+            # slower forward speed for stability on hardware
+            ctrl_msg.linear.x = 0.05
+            ctrl_msg.angular.z = u
 
             ######### Your code ends here #########
 
