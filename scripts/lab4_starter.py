@@ -85,8 +85,8 @@ class RobotController:
         ######### Your code starts here #########
         kP = 0.8
         kD = 0.1
-        u_min = -1.5
-        u_max = 1.5
+        u_min = -2
+        u_max = 2
 
         self.controller = PDController(kP, kD, u_min, u_max)
         ######### Your code ends here #########
