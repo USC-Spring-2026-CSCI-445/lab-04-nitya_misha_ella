@@ -89,7 +89,7 @@ class RobotController:
         u_min = -1.5
         u_max = 1.5
 
-        self.controller = PDController(kP, kD, u_min, u_max)
+        self.controller = PController(kP, kD, u_min, u_max)
         ######### Your code ends here #########
 
         self.desired_distance = desired_distance  # Desired distance from the wall
