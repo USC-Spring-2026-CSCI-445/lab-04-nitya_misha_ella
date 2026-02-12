@@ -83,7 +83,7 @@ class RobotController:
 
         # Define PD controller for wall following here
         ######### Your code starts here #########
-        kP = 1.0
+        kP = 1.5
         kD = 0.1
         u_min = -2
         u_max = 2
