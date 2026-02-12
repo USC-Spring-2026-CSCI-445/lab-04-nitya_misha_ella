@@ -83,10 +83,10 @@ class RobotController:
 
         # Define PD controller for wall following here
         ######### Your code starts here #########
-        kP = 2.5
-        kD = 0.1
-        u_min = -5
-        u_max = 5
+        kP = 1.2
+        kD = 0.05
+        u_min = -1.5
+        u_max = 1.5
 
         self.controller = PDController(kP, kD, u_min, u_max)
         ######### Your code ends here #########
@@ -118,12 +118,18 @@ class RobotController:
 
             # using PD controller, compute and send motor commands
             ######### Your code starts here #########
+
             target = self.desired_distance
-            err = self.ir_distance - target
+
+            # For LEFT wall following:
+            # positive error means too far from wall
+            err = target - self.ir_distance
+
             u = self.controller.control(err, time())
 
-            ctrl_msg.linear.x = 0.08
-            ctrl_msg.angular.z = u
+            ctrl_msg.linear.x = 0.07
+            ctrl_msg.angular.z = -u   # flip sign for correct turning direction
+
             ######### Your code ends here #########
 
             self.robot_ctrl_pub.publish(ctrl_msg)
