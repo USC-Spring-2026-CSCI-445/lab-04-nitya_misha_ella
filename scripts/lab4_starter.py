@@ -126,7 +126,7 @@ class RobotController:
 
             # slower forward speed for stability on hardware
             ctrl_msg.linear.x = 0.05
-            ctrl_msg.angular.z = u
+            ctrl_msg.angular.z = -u
 
             ######### Your code ends here #########
 
