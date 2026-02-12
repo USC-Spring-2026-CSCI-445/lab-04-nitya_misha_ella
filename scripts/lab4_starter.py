@@ -119,7 +119,7 @@ class RobotController:
             # using PD controller, compute and send motor commands
             ######### Your code starts here #########
             target = self.desired_distance
-            err = target - self.ir_distance
+            err = self.ir_distance - target
             u = self.controller.control(err, time())
 
             ctrl_msg.linear.x = 0.08
